@@ -61,7 +61,7 @@
         function calculateValues() {
             let num = parseFloat(document.getElementById("numberInput").value);
             if (!isNaN(num)) {
-                let lowerBound = num - 10;
+                let lowerBound = num - 6;
                 let upperBound = num + 18;
                 document.getElementById("result").innerText = `Stop Loss: ${lowerBound.toFixed(2)}, Target: ${upperBound.toFixed(2)}`;
             } else {
