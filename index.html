@@ -1,73 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Option Calculation</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-align: center;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        input {
-            padding: 10px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 200px;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background: #ff8c00;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #e07b00;
-        }
-        p {
-            margin-top: 15px;
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Target & Stoploss Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #222;
+    }
+
+    .value {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f1f1f1;
+    }
+
+    .label {
+      font-weight: bold;
+      display: block;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Option Calculation</h2>
-        <input type="number" id="numberInput" step="any" placeholder="Enter Price" />
-        <br>
-        <button onclick="calculateValues()">Submit</button>
-        <p id="result"></p>
-    </div>
 
-    <script>
-        function calculateValues() {
-            let num = parseFloat(document.getElementById("numberInput").value);
-            if (!isNaN(num)) {
-                let lowerBound = num - 6;
-                let upperBound = num + 18;
-                document.getElementById("result").innerText = `Stop Loss: ${lowerBound.toFixed(2)}, Target: ${upperBound.toFixed(2)}`;
-            } else {
-                document.getElementById("result").innerText = "Please enter a valid number.";
-            }
-        }
-    </script>
+  <div class="container">
+    <h2>Target & Stoploss Calculator</h2>
+    <input type="number" id="userInput" placeholder="Enter your base value">
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const input = document.getElementById('userInput').value;
+      const number = parseFloat(input);
+
+      if (!isNaN(number)) {
+        const target = number + 30;
+        const stoploss = number - 20;
+
+        document.getElementById('result').innerHTML = `
+          <div class="value">
+            <span class="label">🎯 Target (+30):</span> ${target}
+          </div>
+          <div class="value">
+            <span class="label">🛑 Stoploss (-20):</span> ${stoploss}
+          </div>
+        `;
+      } else {
+        document.getElementById('result').innerHTML =
+          "<div style='color: red;'>Please enter a valid number.</div>";
+      }
+    }
+  </script>
+
 </body>
 </html>
